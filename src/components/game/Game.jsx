@@ -3,7 +3,8 @@ import { useState,useEffect } from 'react'
 import styles from './Game.module.css'
 
 import GameOption from '../gameOption/GameOption'
-import Icon from '../icon/Icon'
+import Gameinfo from '../gameinfo/Gameinfo'
+
 
 const winnerTable = [
   [0, 1, 2],
@@ -35,11 +36,14 @@ function Game () {
       const sum= values.reduce((sum,value) => sum + value )
      if (sum === 3 || sum === -3) {
       setWinner(sum/ 3)
-      console.log('VENCEDOR: ', sum/3)
       }
     })
   }
    
+  const handleReset = () => {
+    setGameState (Array(9).fill(0))
+    setWinner (0)
+  }
 
   useEffect(() => {
     setCurrentPlayer (currentPlayer *-1)
@@ -59,18 +63,13 @@ function Game () {
       )
     }
       </div>
-      <div className= {styles.gameInfo}>
-        <h4>Próximo a jogar:</h4>
-        {
-          currentPlayer === 1 && <Icon iconName= 'circle' />
-        }
-        {
-          currentPlayer === -1 && <Icon iconName= 'x' />
-        }
-      </div>
-
-    </div>
-    
+      <Gameinfo 
+        currentPlayer= {currentPlayer}
+        winner= {winner}
+        onReset= {handleReset}
+      />
+      
+  </div>  
   )
 }
 
