@@ -10,3 +10,9 @@
   gap: 30px;
 }
 
+@media (max-width: 430px) {
+  .gameContent {
+    flex-direction: column;
+  }
+} 
+
