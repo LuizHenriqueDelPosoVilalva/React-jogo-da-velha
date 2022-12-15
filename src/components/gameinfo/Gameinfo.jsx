@@ -3,16 +3,17 @@ import styles from './Gameinfo.module.css'
 import Icon from "../icon/Icon"
 import Button from '../button/Button'
 
-function Gameinfo ({currentPlayer, winner, onReset}) {
+function Gameinfo ({currentPlayer, winner, onReset, isDrawn}) {
 
   const shoudEnableButton = () => {
     if (winner !== 0) return true
+    if (isDrawn) return true
   }
 
   return (
    <div className= {styles.gameInfo}>
      {
-      winner === 0 &&
+      !isDrawn && winner === 0 &&
         <>
           <h4>Próximo a jogar:</h4>
           {
@@ -24,7 +25,7 @@ function Gameinfo ({currentPlayer, winner, onReset}) {
         </>
      }
      {
-       winner !== 0 && 
+       !isDrawn && winner !== 0 && 
         <>
           <h4>Fim de jogo! Campeão:</h4>
           {
@@ -34,6 +35,9 @@ function Gameinfo ({currentPlayer, winner, onReset}) {
             winner === -1 && <Icon iconName= 'x' />
           }
         </>
+     }
+     {
+      isDrawn && <h4>Empate!</h4>
      }
       <Button
       onClick= {onReset}
