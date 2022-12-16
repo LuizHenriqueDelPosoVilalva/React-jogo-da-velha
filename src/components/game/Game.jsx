@@ -4,6 +4,7 @@ import styles from './Game.module.css'
 
 import GameOption from '../gameOption/GameOption'
 import Gameinfo from '../gameinfo/Gameinfo'
+import Score from '../score/Score'
 
 
 const winnerTable = [
@@ -70,6 +71,7 @@ function Game () {
   }, [winner])
  
   return (
+    <>
     <div className= {styles.gameContent}>
       <div className= {styles.game}>
     {
@@ -90,8 +92,9 @@ function Game () {
         onReset= {handleReset}
         isDrawn= {drawn}
       />
-      
-  </div>  
+  </div>
+  <Score />
+  </>
   )
 }
 
